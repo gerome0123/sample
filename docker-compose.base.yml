@@ -13,19 +13,15 @@ services:
       - front_tier
   postgresql:
     restart: always
-    image: sameersbn/postgresql:9.5
+    image: sameersbn/postgresql:latest
     env_file:
       - ./docker/postgresql/.env
     networks:
       - back_tier
-  proxy_www:
-    image: nginx
-    build: ./docker/nginx
-    networks:
-      - front_tier
   redis:
     build: ./docker/redis
     restart: always
+    command: redis-server
     networks:
       - back_tier
   solr:
@@ -33,17 +29,22 @@ services:
     networks:
       - back_tier
   web:
-    restart: 'no'
+    restart: always
     build: ./docker/web
     networks:
+      - front_tier
       - back_tier
+    environment:
+      - PORT=80
+    expose:
+      - '80'
     env_file:
       - ./docker/web/.env
   worker:
-    restart: 'no'
+    restart: always
     build: ./docker/web
-    command: bundle exec sidekiq -C config/sidekiq.yml
+    command: bundle exec sidekiq config/sidekiq.yml
     env_file:
-      - ./docker/worker/.env
+      - ./docker/web/.env
     networks:
       - back_tier
