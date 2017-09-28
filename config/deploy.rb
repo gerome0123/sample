@@ -7,8 +7,7 @@ set :branch, 'master'
 set :deploy_to, -> { "/var/www/#{fetch(:application)}" }
 
 # Default value for :linked_files is []
-set :docker_copy_data, fetch(:linked_files, []).push('docker/web/.env', 'config/application.yml',
-                                                     'config/sidekiq.yml')
+set :docker_copy_data, fetch(:linked_files, []).push('docker/web/.env', 'config/application.yml')
 
 # Default value for keep_releases is 5
 set :keep_releases, 5
