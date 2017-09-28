@@ -6,16 +6,16 @@ services:
       file: docker-compose.base.yml
       service: data
     volumes:
-      - ./../../shared/.bundle:/var/www/.bundle
-      - ./../../shared/bundle:/bundle
-      - ./../../shared/log:/var/www/log
-      - ./../../shared/public/assets:/var/www/public/assets
-      - ./../../shared/public/ckeditor_assets:/var/www/public/ckeditor_assets
-      - ./../../shared/public/pdfs:/var/www/public/pdfs
-      - ./../../shared/public/system:/var/www/public/system
-      - ./../../shared/tmp:/var/www/tmp
-      - ./../../shared/tmp/pids:/var/www/tmp/pids
-      - ./../../shared/vendor/bundle:/var/www/vendor/bundle
+      - /var/www/.bundle
+      - /bundle
+      - ./log:/var/www/log
+      - ./public/assets:/var/www/public/assets
+      - ./public/ckeditor_assets:/var/www/public/ckeditor_assets
+      - ./public/pdfs:/var/www/public/pdfs
+      - ./public/system:/var/www/public/system
+      - ./tmp/pids:/var/www/tmp/pids
+      - /var/www/tmp
+      - /var/www/vendor/bundle
   load_balancer:
     extends:
       file: docker-compose.base.yml
@@ -24,40 +24,51 @@ services:
       - web
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
+  postgresql:
+    extends:
+      file: docker-compose.base.yml
+      service: postgresql
+    mem_limit: 400000000
+    volumes:
+      - /var/lib/postgresql
   redis:
     extends:
       file: docker-compose.base.yml
       service: redis
     volumes:
-      - ./../../shared/redis:/var/lib/redis
+      - /var/lib/redis
   solr:
     extends:
       file: docker-compose.base.yml
       service: solr
-    mem_limit: 1000000000
+    mem_limit: 500000000
     volumes:
-      - ./../../shared/solr:/var/lib/solr
+      - /var/lib/solr
   web:
+    restart: 'no'
     extends:
       file: docker-compose.base.yml
       service: web
     command: bundle exec puma -C config/puma.rb
     links:
-      - redis
+      - postgresql
       - solr
+      - redis
     volumes_from:
       - data
-    mem_limit: 2500000000
+    mem_limit: 1000000000
   worker:
     extends:
       file: docker-compose.base.yml
       service: worker
+    restart: 'no'
     links:
-      - redis
+      - postgresql
       - solr
+      - redis
     volumes_from:
       - data
-    mem_limit: 400000000
+    mem_limit: 500000000
 networks:
   front_tier:
     driver: bridge
