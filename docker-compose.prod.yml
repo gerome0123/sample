@@ -58,6 +58,8 @@ services:
       - solr
     environment:
       - PORT=80
+    expose:
+      - '80'
     volumes_from:
       - data
     mem_limit: 2500000000
