@@ -1,0 +1,37 @@
+html,
+body {
+  background-color: $main-bg-color;
+  height: 100%;
+}
+
+.container {
+  width: 100%;
+}
+
+.header,
+.footer,
+.side-nav {
+  background-color: $main-sections-bg-color;
+  position: relative;
+}
+
+.header {
+  height: auto;
+  width: 100%;
+  z-index: 10;
+
+  .banner {
+    height: inherit;
+    width: 100%;
+  }
+}
+
+.footer {
+  color: $footer-color;
+  padding: 0 50px;
+
+  .md-caption {
+    font-size: 10px;
+    text-align: justify;
+  }
+}

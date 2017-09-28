@@ -1,0 +1,48 @@
+---
+version: '2'
+services:
+  data:
+    image: busybox
+    volumes:
+      - .:/var/www
+  load_balancer:
+    image: dockercloud/haproxy
+    networks:
+      - front_tier
+      - back_tier
+  postgresql:
+    restart: always
+    image: sameersbn/postgresql:9.5
+    env_file:
+      - ./docker/postgresql/.env
+    networks:
+      - back_tier
+  proxy_www:
+    image: nginx
+    build: ./docker/nginx
+    networks:
+      - front_tier
+  redis:
+    build: ./docker/redis
+    restart: always
+    networks:
+      - back_tier
+  solr:
+    build: ./docker/solr
+    networks:
+      - back_tier
+  web:
+    restart: 'no'
+    build: ./docker/web
+    networks:
+      - back_tier
+    env_file:
+      - ./docker/web/.env
+  worker:
+    restart: 'no'
+    build: ./docker/web
+    command: bundle exec sidekiq -C config/sidekiq.yml
+    env_file:
+      - ./docker/worker/.env
+    networks:
+      - back_tier

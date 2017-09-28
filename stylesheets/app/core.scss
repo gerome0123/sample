@@ -1,0 +1,47 @@
+
+.selected {
+  background-color: #b2cdf0;
+}
+
+.side-nav {
+  width: $side-nav-width;
+
+  .user-banner {
+    background-color: $user-banner-bg-color;
+    height: $user-banner-height;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: 5;
+
+    .employee-avatar {
+      border-radius: 50%;
+      height: 55px;
+      width: 55px;
+    }
+
+    .employee-name {
+      color: #fff;
+      font-size: 22px;
+      font-weight: 700;
+      margin-left: 15px;
+    }
+
+    .log-out {
+      color: #eaeaea;
+      float: right;
+      font-size: 14px;
+      font-weight: 400;
+      text-decoration: none;
+    }
+  }
+
+  .side-menu {
+    padding-top: $user-banner-height;
+    position: relative;
+
+    .sub-1 {
+      padding-left: 35px !important;
+    }
+  }
+}

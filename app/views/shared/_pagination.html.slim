@@ -1,0 +1,11 @@
+div.pagination layout="row" layout-align="center center" ng-cloak="" ng-if="ctrl.search.results.meta.total_pages > 1"
+  md-button.md-icon-button ng-click="ctrl.searchAtPage(1)" ng-disabled="ctrl.search.results.meta.current_page == 1" aria-label="{{ 'TOOLS.PREV_SEARCH_RESULT' | translate }}"
+    md-icon.material-icons.md-dark first_page
+  md-button.md-icon-button ng-click="ctrl.searchAtPage(ctrl.search.results.meta.prev_page)" ng-disabled="ctrl.search.results.meta.prev_page == null" aria-label="{{ 'TOOLS.PREV_SEARCH_RESULT' | translate }}"
+    md-icon.material-icons.md-dark keyboard_arrow_left
+  md-button.md-icon-button ng-repeat="page in [] | forLoop: ctrl.pageLimit() : ctrl.search.results.meta.total_pages | limitTo: 3" ng-click="ctrl.searchAtPage(page + 1)" ng-class="{'active': (ctrl.search.results.meta.current_page == page + 1 ? true : false)}"
+    | {{ page + 1 }}
+  md-button.md-icon-button ng-click="ctrl.searchAtPage(ctrl.search.results.meta.next_page)" ng-disabled="ctrl.search.results.meta.next_page == null" aria-label="{{ 'TOOLS.NEXT_SEARCH_RESULT' | translate }}"
+    md-icon.material-icons.md-dark keyboard_arrow_right
+  md-button.md-icon-button ng-click="ctrl.searchAtPage(ctrl.search.results.meta.total_pages)" ng-disabled="ctrl.search.results.meta.current_page == ctrl.search.results.meta.total_pages" aria-label="{{ 'TOOLS.NEXT_SEARCH_RESULT' | translate }}"
+    md-icon.material-icons.md-dark last_page

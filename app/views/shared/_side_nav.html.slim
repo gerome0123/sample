@@ -1,0 +1,20 @@
+div.side-nav.md-whiteframe-2dp layout="column"
+  section layout="column" flex=""
+    div.user-banner.md-whiteframe-3dp layout="row" layout-align="center center"
+    md-content.side-menu flex=""
+      md-list-item ng-href="/" target="_self"
+        div
+          md-icon.material-icons home
+          span.md-mr-l-15 Home
+      md-list-item ng-href="#{books_path}" target="_self"
+        div
+          md-icon.material-icons view_headline
+          span.md-mr-l-15 Books
+      /md-list-item ng-href="#{matters_path}" target="_self"
+        div
+          md-icon.material-icons folder
+          span.md-mr-l-15 Matters
+      /md-list-item ng-href="#{destroy_user_session_path}" target="_self"
+        div
+          md-icon.material-icons exit_to_app
+          span.md-mr-l-15 Log Out

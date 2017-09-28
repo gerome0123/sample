@@ -1,0 +1,9 @@
+doctype html
+html.sessions ng-app="SessionApp" md-theme="{{ defaultTheme }}" ng-csp="" ng-strict-di=""
+  = render 'shared/head'
+  body.container layout="column" flex="" ng-cloak=""
+    = render 'shared/header'
+    div.md-mr-t-30 layout="row" layout-align="center start" flex=""
+      md-content.md-whiteframe-1dp.md-mr-t-20 layout-margin="" flex="33"
+        = yield
+  = render 'shared/foot'

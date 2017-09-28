@@ -1,0 +1,116 @@
+$main-prefix: md;
+
+// Float
+$float-prefix: #{$main-prefix}-ft;
+$float-vals: (left, right);
+@each $val in $float-vals {
+  $val-key: str-slice($val, 1, 1);
+
+  .#{$float-prefix}-#{$val-key} {
+    float: $val !important;
+  }
+}
+
+// Margin
+$margin-prefix: #{$main-prefix}-mr;
+$margin-types: (top, left, bottom, right);
+$margin-vals: (0, 5, 10, 15, 20);
+@each $val in $margin-vals {
+  .#{$margin-prefix}-#{$val} {
+    margin: $val !important;
+  }
+
+  @each $type in $margin-types {
+    $type-key: str-slice($type, 1, 1);
+
+    .#{$margin-prefix}-#{$type-key}-#{$val} {
+      margin-#{$type}: #{$val}px !important;
+    }
+  }
+}
+
+// Overflow
+$overflow-prefix: #{$main-prefix}-of;
+$overflow-types: (x, y, clip, scrolling, style, wrap);
+$overflow-vals: (visible, hidden, scroll, auto, inherit);
+@each $val in $overflow-vals {
+  $val-key: str-slice($val, 1, 1);
+
+  .#{$overflow-prefix}-#{$val-key} {
+    overflow: $val!important;
+  }
+
+  @each $type in $overflow-types {
+    $type-key: str-slice($type, 1, 1);
+
+    .#{$overflow-prefix}-#{$type-key}-#{$val-key} {
+      overflow-#{$type}: $val!important;
+    }
+  }
+}
+
+// Padding
+$padding-prefix: #{$main-prefix}-pd;
+$padding-types: (top, left, bottom, right);
+$padding-vals: (0, 5, 10, 15, 20);
+@each $val in $padding-vals {
+  .#{$padding-prefix}-#{$val} {
+    padding: $val !important;
+  }
+
+  @each $type in $padding-types {
+    $type-key: str-slice($type, 1, 1);
+
+    .#{$padding-prefix}-#{$type-key}-#{$val} {
+      padding-#{$type}: #{$val}px !important;
+    }
+  }
+}
+
+// Position
+$position-prefix: #{$main-prefix}-ps;
+$position-vals: (absolute, fixed, static, relative);
+@each $vals in $position-vals {
+  $val-key: str-slice($vals, 1, 1);
+
+  .#{$position-prefix}-#{$val-key} {
+    position: $vals;
+  }
+}
+
+// Text Align
+$text-align-prefix: #{$main-prefix}-ta;
+$text-align-vals: (right, center, left);
+@each $vals in $text-align-vals {
+  $val-key: str-slice($vals, 1, 1);
+
+  .#{$text-align-prefix}-#{$val-key} {
+    text-align: $vals !important;
+  }
+}
+
+.#{$main-prefix}-dp-in-blx {
+  display: inline-block !important;
+}
+
+.#{$main-prefix}-dp-in-flx {
+  display: inline-flex!important;
+}
+
+.#{$main-prefix}-bg-trans {
+  background: transparent!important;
+}
+
+
+
+.#{$main-prefix}-fnt-sz-20 {
+  font-size: 20px!important;
+}
+
+.#{$main-prefix}-fnt-wt-b {
+  font-weight: bold!important;
+}
+
+.#{$main-prefix}-ws-nwp {
+  white-space: nowrap!important;
+}

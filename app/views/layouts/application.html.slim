@@ -1,0 +1,9 @@
+doctype html
+html.application ng-app="SampleApp" md-theme="{{ defaultTheme }}" ng-csp="" ng-strict-di=""
+  = render 'shared/head'
+  body.container layout="column" flex="" ng-cloak=""
+    = render 'shared/header'
+    div layout="row" flex=""
+      = render 'shared/side_nav'
+      div#main-content layout="column" layout-margin="" ng-view="" flex=""
+  = render 'shared/foot'

@@ -1,0 +1,97 @@
+---
+version: '2'
+services:
+  data:
+    extends:
+      file: docker-compose.base.yml
+      service: data
+    volumes:
+      - ./../../shared/.bundle:/var/www/.bundle
+      - ./../../shared/bundle:/bundle
+      - ./../../shared/log:/var/www/log
+      - ./../../shared/public/assets:/var/www/public/assets
+      - ./../../shared/public/ckeditor_assets:/var/www/public/ckeditor_assets
+      - ./../../shared/public/system:/var/www/public/system
+      - ./../../shared/tmp:/var/www/tmp
+      - ./../../shared/tmp/pids:/var/www/tmp/pids
+      - ./../../shared/vendor/bundle:/var/www/vendor/bundle
+  load_balancer:
+    restart: always
+    extends:
+      file: docker-compose.base.yml
+      service: load_balancer
+    links:
+      - web
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+  proxy_www:
+    restart: always
+    image: nginx
+    build: ./docker/nginx
+    networks:
+      - front_tier
+    links:
+      - load_balancer
+    ports:
+      - "80:80"
+      - "443:443"
+    environment:
+      - WWW_URL=http://load_balancer:80
+    volumes:
+      - ./../../shared/ssl/localcerts:/etc/ssl/localcerts
+      - ./../../shared/public/assets:/var/webroot/assets
+      - ./../../shared/public/system:/var/webroot/system
+      - ./../../shared/public/ckeditor_assets:/var/webroot/ckeditor_assets
+  postgresql:
+    restart: always
+    extends:
+      file: docker-compose.base.yml
+      service: postgresql
+    mem_limit: 400000000
+    volumes:
+      - ./../../shared/postgresql/9.5/main:/var/lib/postgresql/9.5/main
+  redis:
+    restart: always
+    extends:
+      file: docker-compose.base.yml
+      service: redis
+    volumes:
+      - ./../../shared/redis:/var/lib/redis
+  solr:
+    extends:
+      file: docker-compose.base.yml
+      service: solr
+    mem_limit: 1000000000
+    volumes:
+      - ./../../shared/solr:/var/lib/solr
+  web:
+    restart: always
+    extends:
+      file: docker-compose.base.yml
+      service: web
+    command: bundle exec puma -C config/puma.rb
+    links:
+      - postgresql
+      - redis
+      - solr
+    environment:
+      - PORT=80
+    volumes_from:
+      - data
+    mem_limit: 2500000000
+  worker:
+    restart: always
+    extends:
+      file: docker-compose.base.yml
+      service: worker
+    links:
+      - solr
+      - redis
+    volumes_from:
+      - data
+    mem_limit: 400000000
+networks:
+  front_tier:
+    driver: bridge
+  back_tier:
+    driver: bridge

@@ -1,0 +1,131 @@
+@import 'app/variables';
+@import 'app/core';
+
+@import 'app/**/*';
+
+md-dialog-content {
+  width: 600px;
+}
+
+ul.files, ul.folders, ul.users {
+  list-style: none;
+  margin: 24px 0 24px -8px;
+  padding: 0;
+  position: relative;
+
+  li a {
+    display: block;
+    font-weight: 500;
+    padding: 16px 20px;
+    text-decoration: none;
+    background-color: #f6f6f6 !important;
+    box-shadow: none !important;
+    margin-right: 0;
+    margin-top: 0;
+    text-overflow: ellipsis;
+    text-align: left;
+
+    &:hover, &:focus, &:hover md-icon, &:focus md-icon {
+      color: #106CC8 !important;
+      background-color: #ebebeb !important;
+    }
+  }
+}
+
+// table type
+ul.files, ul.folders {
+  margin-top: 12px;
+  margin-bottom: 12px;
+
+  li a {
+    padding: 8px 20px;
+    margin-bottom: 0!important;
+    margin-left: 0!important;
+
+    div > div {
+      font-size: 12px;
+      font-weight: 400;
+      padding: 0 20px;
+
+      &.uploaded_by {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        text-transform: initial;
+      }
+    }
+  }
+}
+
+.utility {
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+}
+
+.bg-transparent {
+  background-color: transparent;
+}
+
+.breadcrumbs {
+  background-color: transparent;
+
+  .md-subheader-inner {
+    padding-left: 12px;
+  }
+}
+
+.loading-indicator{
+  position: absolute;
+  top: calc(100% - 50%);
+  left: calc(100% - 50%);
+  z-index: 100;
+}
+
+// context-menu
+.dropdown-menu {
+  background-color: #FFFFFF;
+  list-style: none;
+  padding: 0;
+  font-size: 14px;
+
+  border-radius: 3px;
+  box-shadow: 1px 1px 2px 2px gray;
+  list-style: none;
+
+  li {
+    padding: 10px 20px;
+
+    &:hover, &:focus {
+      color: #106CC8 !important;
+      background-color: #ebebeb !important;
+
+      a {
+        color: #106CC8 !important;
+      }
+    }
+  }
+
+  li a {
+    text-decoration: none;
+    color: #000;
+  }
+}
+
+.pagination {
+  height: 45px;
+  margin: 6px 0;
+
+  .md-button:not([disabled]) {
+    &.active {
+      background-color: #808080;
+      color: #fff;
+      font-weight: bold;
+    }
+
+    &:hover {
+      color: inherit;
+      background-color: #fafafa!important;
+      font-weight: bold;
+    }
+  }
+}

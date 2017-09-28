@@ -1,0 +1,36 @@
+Metrics/AbcSize:
+  Exclude:
+    - 'app/models/sample/migrated_record.rb'
+    - 'lib/sample/migrations.rb'
+    - 'lib/sample/migrator/models/base.rb'
+    - 'lib/sample/migrator/syncer.rb'
+    - 'lib/sample/migrator/syncer/base.rb'
+
+Metrics/ClassLength:
+  Exclude:
+    - 'lib/sample/migrator/syncer/base.rb'
+
+Metrics/CyclomaticComplexity:
+  Exclude:
+    - 'lib/sample/migrator/syncer/base.rb'
+
+Metrics/MethodLength:
+  Exclude:
+    - 'lib/sample/migrations.rb'
+    - 'lib/sample/migrator/syncer/base.rb'
+
+Metrics/PerceivedComplexity:
+  Exclude:
+    - 'lib/sample/migrator/syncer/base.rb'
+
+Rails/ApplicationRecord:
+  Exclude:
+    - 'app/models/sample/migrated_record.rb'
+    - 'lib/sample/migrator/models/base.rb'
+
+Rails/Output:
+  Exclude:
+    - 'lib/sample/migrations.rb'
+
+Style/Documentation:
+  Enabled: false
