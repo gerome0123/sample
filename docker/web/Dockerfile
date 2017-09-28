@@ -15,6 +15,3 @@ RUN gem install bundler
 RUN npm install -g bower
 RUN ln -s /usr/bin/nodejs /usr/bin/node
 RUN echo '{ "allow_root": true }' > /root/.bowerrc
-
-ENV HTTP_PORT 80
-EXPOSE $HTTP_PORT
