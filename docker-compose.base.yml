@@ -7,6 +7,8 @@ services:
       - .:/var/www
   load_balancer:
     image: dockercloud/haproxy
+    ports:
+      -'3000:80'
     networks:
       - front_tier
       - back_tier
