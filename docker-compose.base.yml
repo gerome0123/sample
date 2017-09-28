@@ -13,7 +13,7 @@ services:
       - front_tier
   postgresql:
     restart: always
-    image: sameersbn/postgresql:latest
+    image: sameersbn/postgresql:9.5
     env_file:
       - ./docker/postgresql/.env
     networks:
